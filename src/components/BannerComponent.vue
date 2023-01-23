@@ -1,22 +1,20 @@
 <template>
   <div>
-    <h2>hello im component</h2>
-    <!-- <div>
-      <h2>mode : {{ mode }}</h2>
-    </div>
-    <div>
-      <h2>carous : {{ carouselOnMobil }}</h2>
-    </div>
-    <div>
-      <h2>items : {{ items }}</h2>
-    </div> -->
-    <!-- Square -->
-    <div v-if="mode.toLowerCase() === 'square'" class="squareDiv">
-      <div style="flex: 1">
-        <h3>de</h3>
-      </div>
-    </div>
-    <!-- Rectangle -->
+    <b-container >
+      <b-row class="text-center">
+        <b-col cols="4" v-for="(item, index) in items" :key="index">
+          <img style='height: 100%; width: 100%; object-fit: contain' v-if="item.type === 'image'" :src="item.src">
+          <div v-else-if="item.type === 'cta'" class="cta">
+            <b-row>
+              <strong>{{ item.title }}</strong>
+            </b-row>
+            <b-row>
+              <button>{{ item.button }}</button>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
  </div>
 </template>
 <script>
@@ -42,10 +40,10 @@ export default {
 }
 </script>
 <style>
-.squareDiv {
-  border: thin solid black;
-  display: flex; 
-  flex: 0 0 auto;
-  padding-bottom: 60%;
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

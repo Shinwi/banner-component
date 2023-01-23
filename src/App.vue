@@ -4,12 +4,6 @@
       :mode="'sQuaRE'"
       :items="items"
     ></banner-component>
-
-    <!-- <banner-component
-      :mode="'reCtangle'"
-      :carouselOnMobil="true"
-      :items="items"
-    ></banner-component> -->
   </div>
 </template>
 
@@ -49,5 +43,9 @@ export default {
 <style>
 #appContainer {
   border: thin solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 </style>
