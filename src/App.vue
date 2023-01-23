@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="appContainer">
     <banner-component
-      :mode="'square'"
+      :mode="'sQuaRE'"
       :items="items"
     ></banner-component>
 
@@ -46,3 +46,8 @@ export default {
   }
 }
 </script>
+<style>
+#appContainer {
+  border: thin solid red;
+}
+</style>
