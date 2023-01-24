@@ -1,8 +1,8 @@
 <template>
   <div id="appContainer">
     <banner-component
-      :mode="'sQuaRE'"
-      :items="items"
+      :mode="'square'"
+      :items="items2"
     ></banner-component>
   </div>
 </template>
@@ -35,14 +35,52 @@ export default {
           src: 'https://picsum.photos/400',
           link: 'https://example.com/link3'
         }
+      ],
+      items2: [
+        {
+          type: 'cta',
+          title: 'CTA Title',
+          button: 'CTA Button',
+          link: 'https://example.com/link1'
+        },
+        {
+          type: 'image',
+          aspectRatio: 'square',
+          src: 'https://picsum.photos/400',
+          link: 'https://example.com/link2'
+        },
+        {
+          type: 'image',
+          aspectRatio: 'square',
+          src: 'https://picsum.photos/400',
+          link: 'https://example.com/link3'
+        },
+        {
+          type: 'image',
+          aspectRatio: 'square',
+          src: 'https://picsum.photos/400',
+          link: 'https://example.com/link3'
+        },
+        {
+          type: 'image',
+          aspectRatio: 'square',
+          src: 'https://picsum.photos/400',
+          link: 'https://example.com/link3'
+        },
+        {
+          type: 'image',
+          aspectRatio: 'square',
+          src: 'https://picsum.photos/400',
+          link: 'https://example.com/link3'
+        }
       ]
+      // items3
     }
   }
 }
 </script>
 <style>
 #appContainer {
-  border: thin solid red;
   display: flex;
   align-items: center;
   justify-content: center;
