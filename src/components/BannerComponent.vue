@@ -1,17 +1,34 @@
 <template>
   <div>
     <b-container>
-      <b-row v-if="mode.toLowerCase() === 'square'" class="text-center">
+      <!-- Square mode: desktop -->
+      <b-row v-if="mode.toLowerCase() === 'square' && !isMobile" class="text-center">
         <b-col sm="4" lg="4" md="4" v-for="(item, index) in items" :key="index">
-          <a :href="item.link" target="_blank" v-if="item.type === 'image'" >
-            <img class="fit-image-in-container" :src="item.src" @load="onImgLoad">
-          </a>
-          <div v-else-if="item.type === 'cta'" id="align-items-cta" style="height:100%;">
-            <h3><strong>{{ item.title }}</strong></h3>
-            <a :href="item.link" target="_blank" class="cta-button"><strong>{{ item.button }}</strong></a>
-          </div>
+            <a :href="item.link" target="_blank" v-if="item.type === 'image'" >
+              <img class="fit-image-in-container" :src="item.src" @load="onImgLoad">
+            </a>
+            <div v-else-if="item.type === 'cta'" id="align-items-cta" style="height:100%;">
+              <h3><strong>{{ item.title }}</strong></h3>
+              <a :href="item.link" target="_blank" class="cta-button"><strong>{{ item.button }}</strong></a>
+            </div>
         </b-col>
       </b-row>
+      <!-- Square mode: mobile -->
+      <b-row v-else-if="mode.toLowerCase() === 'square' && isMobile" class="text-center">
+        <b-row v-for="(item, index) in items" :key="index" style="width: 100%;">
+          <!-- {{ item }} -->
+          <b-col v-if="item.type === 'image'" class="col-10 ml-5">
+            <a :href="item.link" target="_blank">
+              <img class="fit-image-in-container" :src="item.src" @load="onImgLoad">
+            </a>
+          </b-col>
+          <b-col v-else-if="item.type === 'cta'" class="col-10 ml-5" id="align-items-cta">
+            <h3><strong>{{ item.title }}</strong></h3>
+            <a :href="item.link" target="_blank" class="cta-button"><strong>{{ item.button }}</strong></a>
+          </b-col>
+        </b-row>
+      </b-row>
+      <!-- Rectangle mode: both desktop and mobile -->
       <b-row v-else-if="mode.toLowerCase() === 'rectangle'" class="text-center">
         <b-col lg="8">
           <a :href="getRectangleModeImage.link" target="_blank">

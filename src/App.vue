@@ -1,13 +1,18 @@
 <template>
   <div id="appContainer">
-    <!-- <banner-component
+    <banner-component
+      :mode="'square'"
+      :items="items"
+    ></banner-component>
+    <!-- 
+    <banner-component
       :mode="'square'"
       :items="items2"
     ></banner-component> -->
-    <banner-component
+    <!-- <banner-component
       :mode="'rectangle'"
       :items="rectangleItems"
-    ></banner-component>
+    ></banner-component> -->
   </div>
 </template>
 
