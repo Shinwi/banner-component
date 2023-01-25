@@ -1,21 +1,30 @@
 <template>
   <div>
     <b-container>
-      <b-row class="text-center">
+      <b-row v-if="mode.toLowerCase() === 'square'" class="text-center">
         <b-col sm="4" lg="4" md="4" v-for="(item, index) in items" :key="index">
           <a :href="item.link" target="_blank" v-if="item.type === 'image'" >
-            <!-- TODO: show a loader spinner while the image is loading -->
-            <img style='height: 100%; width: 100%; object-fit: contain' :src="item.src" @load="onImgLoad">
+            <img class="fit-image-in-container" :src="item.src" @load="onImgLoad">
           </a>
-          <div v-else-if="item.type === 'cta'" id="cta">
-            <b-row style="margin-top: 3em;">
-              <h3><strong>{{ item.title }}</strong></h3>
-            </b-row>
-            <b-row style="margin-top: 2em;">
-              <a :href="item.link" target="_blank" class="cta-button"><strong>{{ item.button }}</strong></a>
-            </b-row>
+          <div v-else-if="item.type === 'cta'" id="align-items-cta" style="height:100%;">
+            <h3><strong>{{ item.title }}</strong></h3>
+            <a :href="item.link" target="_blank" class="cta-button"><strong>{{ item.button }}</strong></a>
           </div>
         </b-col>
+      </b-row>
+      <b-row v-else-if="mode.toLowerCase() === 'rectangle'" class="text-center">
+        <b-col lg="8">
+          <a :href="getRectangleModeImage.link" target="_blank">
+            <img :src="getRectangleModeImage.src" class="fit-image-in-container">
+          </a>
+        </b-col>
+        <b-col lg="4" id="align-items-cta">
+          <h3><strong>{{ getRectangleModeCTA.title }}</strong></h3>
+          <a :href="getRectangleModeCTA.link" target="_blank" class="cta-button"><strong>{{ getRectangleModeCTA.button }}</strong></a>
+        </b-col>
+      </b-row>
+      <b-row v-else>
+        <h2 style="color:red">Invalid props</h2>
       </b-row>
     </b-container>
  </div>
@@ -53,9 +62,26 @@ export default {
     I only used 3 colors here (the one used in the design documents, but we can add more if we wish to.)
   */
   mounted () {
-    var colors = ['lightblue', 'lightgreen', 'lightgray'];
-    var random_color = colors[Math.floor(Math.random() * colors.length)];
-    document.getElementById('cta').style.background = random_color;
+    // if (this.mode.toLowerCase() === 'square') {
+    //   var colors = ['lightblue', 'lightgreen', 'lightgray']
+    //   var random_color = colors[Math.floor(Math.random() * colors.length)]
+    //   document.getElementById('cta').style.background = random_color
+    // }
+    var colors = ['lightblue', 'lightgreen', 'lightgray']
+    var random_color = colors[Math.floor(Math.random() * colors.length)]
+    document.getElementById('align-items-cta').style.background = random_color
+  },
+  computed: {
+    isMobile () {
+      // TODO: update this
+      return false
+    },
+    getRectangleModeImage () {
+      return this.isMobile ? this.items.filter(i => i.type === 'image' && i.aspectRatio !== 'rectangle')[0] : this.items.filter(i => i.type === 'image' && i.aspectRatio !== 'square')[0]
+    },
+    getRectangleModeCTA () {
+      return this.items.filter(i => i.type === 'cta')[0]
+    }
   },
   methods: {
     onImgLoad () {
@@ -65,15 +91,8 @@ export default {
 }
 </script>
 <style>
-#cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%; /* so that the div can fill the entire col-4 container*/
-}
 /* Overriding the paddings in col-4 original styling to remove spaces between divs in the component*/
-.col-lg-4, .col-md-4, .col-sm-4 {
+.col-lg-4, .col-lg-8, .col-md-4, .col-sm-4 {
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
@@ -87,5 +106,16 @@ a {
 }
 a:hover {
   text-decoration: none;
+}
+.fit-image-in-container {
+  height: 100%; 
+  width: 100%; 
+  object-fit: contain
+}
+#align-items-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 </style>

@@ -1,8 +1,12 @@
 <template>
   <div id="appContainer">
-    <banner-component
+    <!-- <banner-component
       :mode="'square'"
       :items="items2"
+    ></banner-component> -->
+    <banner-component
+      :mode="'rectangle'"
+      :items="rectangleItems"
     ></banner-component>
   </div>
 </template>
@@ -73,8 +77,27 @@ export default {
           src: 'https://picsum.photos/400',
           link: 'https://example.com/link3'
         }
+      ],
+      rectangleItems: [
+        {
+          type: 'image',
+          aspectRatio: 'rectangle',
+          src: 'https://picsum.photos/1200/400',
+          link: 'https://example.com/link1'
+        },
+        {
+          type: 'image',
+          aspectRatio: 'square',
+          src: 'https://picsum.photos/400',
+          link: 'https://example.com/link1'
+        },
+        {
+          type: 'cta',
+          title: 'CTA Title',
+          button: 'CTA Button',
+          link: 'https://example.com/link1'
+        }
       ]
-      // items3
     }
   }
 }
